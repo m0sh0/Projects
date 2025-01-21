@@ -41,7 +41,21 @@ class PatternDrawing
             {
                 Console.WriteLine("❌ Invalid choice! Please restart the program.");
                 continue;
+
+                Console.WriteLine("Do you want to restart the program? (y/n)");
+
+                string restartChoice = Console.ReadLine();
+                if (restartChoice.ToLower() != "y")
+                {
+                    break;
+                }
+                else
+                {
+                    return;
+                }
+
             }
+
 
             // Step 4: Generate the selected pattern
             switch (choice)
@@ -96,11 +110,34 @@ class PatternDrawing
                     break;
 
                 case 6: // Pyramid
-                    // TODO: Use nested loops to create a centered pyramid
+                    for (int i = 1; i <= rows; i++)
+                    {
+                        for (int x = i; x <= rows; x++)
+                        {
+                            Console.Write(" ");
+                        }
+                        for (int j = 1; j <= i; j++)
+                        {
+                            Console.Write("*" + " ");
+                        }
+                        Console.WriteLine();
+                    }
                     break;
 
                 case 7: // Reverse Pyramid
-                    // TODO: Use nested loops to create a reverse pyramid
+                    for (int i = rows; i >= 0; i--)
+                    {
+                        for (int x = i; x <= rows; x++)
+                        {
+                            Console.Write(" ");
+                        }
+                        for (int j = 1; j <= i; j++)
+                        {
+                            Console.Write("*" + " ");
+                        }
+                        Console.WriteLine();
+                    }
+
                     break;
 
                 case 8: // Rectangle with Hollow Center
@@ -113,10 +150,7 @@ class PatternDrawing
             }
 
             // Step 5: Optional - Allow the user to restart or exit
-            Console.WriteLine("Do you want to restart the program? (y/n)");
-            string restartChoice = Console.ReadLine();
-            if (restartChoice.ToLower() != "y")
-                break;
+      
         }
     }
 }

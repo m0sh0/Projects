@@ -6,18 +6,22 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            int rows = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i <= rows; i++)
+            int n = int.Parse(Console.ReadLine());
+            for (int i = n; i >= 0; i--)
             {
-                for (int j = rows; j >= i; j--)
+                for (int x = i; x <= n; x++)
                 {
-                    Console.Write("*");
+                    Console.Write(" ");
                 }
-                Console.Write("\n");
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write("*" + " ");
+                }
+                Console.WriteLine();
             }
+
+
         }
-
-
     }
 }
