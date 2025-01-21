@@ -26,12 +26,15 @@ class PatternDrawing
             int rows = 0, width = 0, height = 0;
             if (choice >= 1 && choice <= 7)
             {
-                Console.Write("Enter the amount of rows:");
+                Console.Write("Enter the amount of rows: ");
                 rows = int.Parse(Console.ReadLine());
             }
             else if (choice == 8)
             {
+                Console.Write("Enter the height of the rectangle: ");
                 height = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter the width of the rectangle: ");
                 width = int.Parse(Console.ReadLine());
             }
             else
@@ -50,12 +53,26 @@ class PatternDrawing
                         {
                             Console.Write("*");
                         }
-                        Console.WriteLine("\n");
+                        Console.Write("\n");
                     }
                     break;
 
                 case 2: // Square with Hollow Center
-                    // TODO: Use nested loops to create a square with a hollow center
+                    for (int i = 0; i < rows; i++)
+                    {
+                        for (int j = 0; j < rows; j++)
+                        {
+                            if (i == 0 || i == rows - 1 || j == 0 || j == rows - 1)
+                            {
+                                Console.Write("* ");
+                            }
+                            else
+                            {
+                                Console.Write("  ");
+                            }
+                        }
+                        Console.WriteLine();
+                    }
                     break;
 
                 case 3: // Diamond
@@ -63,7 +80,15 @@ class PatternDrawing
                     break;
 
                 case 4: // Left-angled Triangle
-                    // TODO: Use nested loops to create a left-angled triangle
+
+                    for (int i = 0; i <= rows; i++)
+                    {
+                        for (int j = rows; j >= i; j--)
+                        {
+                            Console.Write("*");
+                        }
+                        Console.Write("\n");
+                    }
                     break;
 
                 case 5: // Hollow Square
