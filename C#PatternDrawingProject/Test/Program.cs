@@ -8,7 +8,7 @@ namespace Test
         {
 
             int n = int.Parse(Console.ReadLine());
-            for (int i = n; i >= 0; i--)
+            for (int i = 1; i <= n; i++)
             {
                 for (int x = i; x <= n; x++)
                 {
@@ -20,8 +20,8 @@ namespace Test
                 }
                 Console.WriteLine();
             }
-
-
         }
+
+
     }
 }

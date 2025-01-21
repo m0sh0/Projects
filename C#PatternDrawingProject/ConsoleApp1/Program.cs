@@ -7,16 +7,15 @@ class PatternDrawing
         while (true) // Loop for restarting the program
         {
             // Step 1: Display a menu to the user
-            Console.WriteLine("🌟 Welcome to the C# Pattern Drawing Program!");
+            Console.WriteLine("Welcome to the C# Pattern Drawing Program!");
             Console.WriteLine("Choose a pattern type:");
             Console.WriteLine("1. Right-angled Triangle");
             Console.WriteLine("2. Square with Hollow Center");
             Console.WriteLine("3. Diamond");
             Console.WriteLine("4. Left-angled Triangle");
-            Console.WriteLine("5. Hollow Square");
-            Console.WriteLine("6. Pyramid");
-            Console.WriteLine("7. Reverse Pyramid");
-            Console.WriteLine("8. Rectangle with Hollow Center");
+            Console.WriteLine("5. Pyramid");
+            Console.WriteLine("6. Reverse Pyramid");
+            Console.WriteLine("7. Rectangle with Hollow Center");
 
             // Step 2: Get the user's choice
             Console.Write("Enter the number corresponding to your choice: ");
@@ -24,12 +23,12 @@ class PatternDrawing
 
             // Step 3: Get dimensions based on choice
             int rows = 0, width = 0, height = 0;
-            if (choice >= 1 && choice <= 7)
+            if (choice >= 1 && choice <= 6)
             {
                 Console.Write("Enter the amount of rows: ");
                 rows = int.Parse(Console.ReadLine());
             }
-            else if (choice == 8)
+            else if (choice == 7)
             {
                 Console.Write("Enter the height of the rectangle: ");
                 height = int.Parse(Console.ReadLine());
@@ -39,19 +38,17 @@ class PatternDrawing
             }
             else
             {
-                Console.WriteLine("❌ Invalid choice! Please restart the program.");
-                continue;
-
                 Console.WriteLine("Do you want to restart the program? (y/n)");
 
                 string restartChoice = Console.ReadLine();
                 if (restartChoice.ToLower() != "y")
                 {
+                    Console.WriteLine("Sad to see you go :( Goodbye!");
                     break;
                 }
                 else
                 {
-                    return;
+                    continue;
                 }
 
             }
