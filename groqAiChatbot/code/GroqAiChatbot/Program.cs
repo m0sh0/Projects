@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 class Program
 {
     private static readonly HttpClient client = new HttpClient();
-    private const string apiKey = "YOUR_API_KEY_HERE"; // Replace with your actual API key
-    private const string apiUrl = "https://api.groq.com/v1/chat/completions";
+    private const string apiKey = "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"; // Replace with your actual API key
+    private const string apiUrl = "https://api.groq.com/openai/v1";
 
     static async Task<string> GetAIResponse(string userInput)
     {
@@ -44,7 +44,7 @@ class Program
             string userInput = Console.ReadLine();
             if (userInput.ToLower() == "exit" || userInput.ToLower() == "quit")
             {
-                Console.WriteLine("\nGoodbye! 👋");
+                Console.WriteLine("\nGoodbye!");
                 break;
             }
             string response = await GetAIResponse(userInput);
