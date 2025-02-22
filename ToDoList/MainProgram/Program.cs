@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MainProgram
 {
     internal class Program
     {
+        static List<string> tasks = new();
+        static string filePath = "tasks.txt";
         static void Main(string[] args)
         {
             Console.WriteLine("To-Do List.\n");
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1.Add task");
             Console.WriteLine("2.View tasks");
-            Console.WriteLine("3.Exit");
+            Console.WriteLine("3.Mark task as completed");
+            Console.WriteLine("4.Remove task");
+            Console.WriteLine("5.Exit");
 
-            List<string> tasks = new();
-
+            
             while (true)
             {
                 Console.Write("Input: ");
@@ -22,7 +26,7 @@ namespace MainProgram
 
                 if (input == "1")
                 {
-                    AddTask(tasks);
+                    AddTask();
                 }
                 else if (input == "2")
                 {
@@ -32,19 +36,67 @@ namespace MainProgram
                     }
                     else
                     {
-                        PrintTasks(tasks);
+                        PrintTasks();
                     }
                 }
                 else if (input == "3")
                 {
-                    Console.WriteLine("Goodbye!");
+                    CompletedTask();
+                }
+                else if (input == "4")
+                {
+                    RemoveTask();
+                }
+                else if (input == "5")
+                {
+                    SaveTasks();
+                    Console.WriteLine("Tasks saved. Goodbye!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option. Please try again!");
                 }
 
   
             }
   
         }
-        private static void AddTask(List<string> tasks)
+
+        static void SaveTasks()
+        {
+            File.AppendAllLines(filePath, tasks);
+        }
+
+        static void RemoveTask()
+        {
+            PrintTasks();
+            Console.WriteLine("Enetr a task you want to remove: ");
+
+            if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= tasks.Count)
+            {
+                tasks.RemoveAt(index - 1);
+                Console.WriteLine("Task removed");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+            }
+        }
+
+        static void CompletedTask()
+        {
+            PrintTasks();
+            Console.WriteLine("Enter task number to mark as completed: ");
+
+            if (int.TryParse(Console.ReadLine(),out int index) && index > 0 && index <= tasks.Count)
+            {
+                tasks[index - 1] = "[✔] " + tasks[index - 1].Substring(4);
+                Console.WriteLine("Task marked as completed!");
+            }
+        }
+
+        static void AddTask()
         {
             Console.WriteLine("What task would you like to add?");
             Console.Write("Task name: ");
@@ -56,16 +108,25 @@ namespace MainProgram
                 return;
             }
 
-            tasks.Add(task);
+            tasks.Add("[ ] " + task);
+            Console.WriteLine("\nTask added");
         }
 
-        private static void PrintTasks(List<string> tasks)
+        static void PrintTasks()
         {
-            Console.WriteLine("Tasks:");
+            Console.WriteLine("\nYour tasks:");
 
             for (int i = 0; i < tasks.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {tasks[i]}");
+            }
+        }
+
+        static void LoadFile()
+        {
+            if (File.Exists(filePath))
+            {
+                tasks = new List<string>(File.ReadAllLines(filePath));
             }
         }
 
