@@ -10,6 +10,8 @@ namespace MainProgram
         static string filePath = "tasks.txt";
         static void Main(string[] args)
         {
+            LoadTasks();
+
             Console.WriteLine("To-Do List.\n");
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1.Add task");
@@ -65,13 +67,13 @@ namespace MainProgram
 
         static void SaveTasks()
         {
-            File.AppendAllLines(filePath, tasks);
+            File.WriteAllLines(filePath, tasks);
         }
 
         static void RemoveTask()
         {
             PrintTasks();
-            Console.WriteLine("Enetr a task you want to remove: ");
+            Console.WriteLine("Enter a task you want to remove: ");
 
             if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= tasks.Count)
             {
@@ -122,11 +124,17 @@ namespace MainProgram
             }
         }
 
-        static void LoadFile()
+        static void LoadTasks()
         {
             if (File.Exists(filePath))
             {
-                tasks = new List<string>(File.ReadAllLines(filePath));
+                tasks.Clear();
+                tasks.AddRange(File.ReadAllLines(filePath));
+                Console.WriteLine("Tasks loaded from 'tasks.txt'.");
+            }
+            else
+            {
+                Console.WriteLine("No saved tasks.");
             }
         }
 
