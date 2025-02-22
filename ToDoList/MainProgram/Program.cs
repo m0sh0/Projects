@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace MainProgram
 {
@@ -10,17 +11,14 @@ namespace MainProgram
         static string filePath = "tasks.txt";
         static void Main(string[] args)
         {
-            LoadTasks();
+         Console.OutputEncoding = Encoding.UTF8;
+         ShowLoading("Loading tasks");
+         LoadTasks();
 
-            Console.WriteLine("To-Do List.\n");
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1.Add task");
-            Console.WriteLine("2.View tasks");
-            Console.WriteLine("3.Mark task as completed");
-            Console.WriteLine("4.Remove task");
-            Console.WriteLine("5.Exit");
+            ShowHeader();
+            ShowMenu();
 
-            
+
             while (true)
             {
                 Console.Write("Input: ");
@@ -65,6 +63,29 @@ namespace MainProgram
   
         }
 
+        static void ShowHeader()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("===========================================");
+            Console.WriteLine("            <<<TO-DO LIST APP>>>           ");
+            Console.WriteLine("===========================================");
+            Console.ResetColor();
+        }
+
+        static void ShowMenu()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("To-Do List.\n");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1.Add task");
+            Console.WriteLine("2.View tasks");
+            Console.WriteLine("3.Mark task as completed");
+            Console.WriteLine("4.Remove task");
+            Console.WriteLine("5.Exit");
+            Console.ResetColor();
+        }
+
         static void SaveTasks()
         {
             File.WriteAllLines(filePath, tasks);
@@ -93,7 +114,7 @@ namespace MainProgram
 
             if (int.TryParse(Console.ReadLine(),out int index) && index > 0 && index <= tasks.Count)
             {
-                tasks[index - 1] = "[✔] " + tasks[index - 1].Substring(4);
+                tasks[index - 1] = "[^] " + tasks[index - 1].Substring(4);
                 Console.WriteLine("Task marked as completed!");
             }
         }
@@ -120,8 +141,18 @@ namespace MainProgram
 
             for (int i = 0; i < tasks.Count; i++)
             {
+                if (tasks[i].StartsWith("[^]"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+
                 Console.WriteLine($"{i + 1}. {tasks[i]}");
             }
+            Console.ResetColor();
         }
 
         static void LoadTasks()
@@ -136,6 +167,19 @@ namespace MainProgram
             {
                 Console.WriteLine("No saved tasks.");
             }
+        }
+
+        static void ShowLoading(string message)
+        {
+            Console.WriteLine(message);
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write('.');
+                System.Threading.Thread.Sleep(500);
+            }
+
+            Console.WriteLine();
         }
 
 
