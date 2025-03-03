@@ -76,7 +76,6 @@ namespace MainProgram
         static void ShowMenu()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("To-Do List.\n");
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1.Add task");
             Console.WriteLine("2.View tasks");
